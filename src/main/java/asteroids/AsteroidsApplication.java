@@ -16,6 +16,10 @@ import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
 
 public class AsteroidsApplication extends Application{
+    
+    public static int WIDTH = 640;
+    public static int HEIGHT = 480;
+    
 
     public static void main(String[] args) {
         launch(AsteroidsApplication.class);
@@ -29,13 +33,13 @@ public class AsteroidsApplication extends Application{
     @Override
     public void start(Stage win) throws Exception {
         Pane pane = new Pane();
-        pane.setPrefSize(600, 400);
+        pane.setPrefSize(WIDTH, HEIGHT);
         
-        Ship ship = new Ship(150,100);
+        Ship ship = new Ship(WIDTH/2,HEIGHT/2);
         List<Asteroid> asteroids = new ArrayList<>();
         for(int i=0; i<5; i++){
             Random rand = new Random();
-            Asteroid asteroid = new Asteroid(rand.nextInt(100),rand.nextInt(100));
+            Asteroid asteroid = new Asteroid(rand.nextInt(WIDTH/3),rand.nextInt(HEIGHT));
             asteroids.add(asteroid);
         }
         
