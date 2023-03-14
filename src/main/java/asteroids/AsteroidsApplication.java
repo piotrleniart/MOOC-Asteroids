@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
@@ -27,11 +28,10 @@ public class AsteroidsApplication extends Application{
         Pane pane = new Pane();
         pane.setPrefSize(600, 400);
         
-        Polygon ship = new Polygon(-5,-5,10,0,-5,5);
-        ship.setTranslateX(300);
-        ship.setTranslateY(200);
+        Ship ship = new Ship(150,100);
         
-        pane.getChildren().add(ship);
+        
+        pane.getChildren().add(ship.getShip());
         
         Scene scene = new Scene(pane);
         
@@ -54,11 +54,16 @@ public class AsteroidsApplication extends Application{
             @Override
             public void handle(long now){
                 if(pressedKeys.getOrDefault(KeyCode.LEFT, false)){
-                    ship.setRotate(ship.getRotate()-5);
+                    ship.trunLeft();
                 }
                 if(pressedKeys.getOrDefault(KeyCode.RIGHT, false)){
-                    ship.setRotate(ship.getRotate()+5);
+                    ship.trunRight();
                 }
+                if(pressedKeys.getOrDefault(KeyCode.UP, false)){
+                    ship.accelerate();
+                }
+                
+                ship.move();
             }
         }.start();
     }
