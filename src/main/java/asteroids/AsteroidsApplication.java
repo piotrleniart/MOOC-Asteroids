@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
 
 public class AsteroidsApplication extends Application{
@@ -19,10 +20,16 @@ public class AsteroidsApplication extends Application{
 
     @Override
     public void start(Stage win) throws Exception {
-        Pane layout = new Pane();
-        layout.setPrefSize(600, 400);
+        Pane pane = new Pane();
+        pane.setPrefSize(600, 400);
         
-        Scene scene = new Scene(layout);
+        Polygon ship = new Polygon(-5,-5,10,0,-5,5);
+        ship.setTranslateX(300);
+        ship.setTranslateY(200);
+        
+        pane.getChildren().add(ship);
+        
+        Scene scene = new Scene(pane);
         win.setTitle("Asteroids");
         win.setScene(scene);
         win.show();
