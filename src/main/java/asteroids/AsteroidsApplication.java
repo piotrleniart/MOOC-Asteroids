@@ -118,6 +118,16 @@ public class AsteroidsApplication extends Application{
                 });
                 projectiles.removeAll(removeDead(projectiles, pane));
                 asteroids.removeAll(removeDead(asteroids, pane));
+                
+                
+                if(Math.random() < 0.005){
+                    Asteroid asteroid = new Asteroid(WIDTH, HEIGHT);
+                    if(!asteroid.collide(ship)){
+                        asteroids.add(asteroid);
+                        pane.getChildren().add(asteroid.getCharacter());
+                    }
+                }
+                
             }
         }.start();
     }
