@@ -1,7 +1,11 @@
 package asteroids;
 
+import java.util.HashMap;
+import java.util.Map;
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
@@ -30,9 +34,34 @@ public class AsteroidsApplication extends Application{
         pane.getChildren().add(ship);
         
         Scene scene = new Scene(pane);
+        
+        Map<KeyCode,Boolean> pressedKeys = new HashMap<>();
+        
+        scene.setOnKeyPressed((event) -> {
+            pressedKeys.put(event.getCode(), Boolean.TRUE);
+        });
+        
+        scene.setOnKeyReleased((event) -> {
+            pressedKeys.put(event.getCode(), Boolean.FALSE);
+        });
+        
         win.setTitle("Asteroids");
         win.setScene(scene);
         win.show();
+        
+        new AnimationTimer(){
+
+            @Override
+            public void handle(long now){
+                if(pressedKeys.getOrDefault(KeyCode.LEFT, false)){
+                    ship.setRotate(ship.getRotate()-5);
+                }
+                if(pressedKeys.getOrDefault(KeyCode.RIGHT, false)){
+                    ship.setRotate(ship.getRotate()+5);
+                }
+            }
+        }.start();
     }
+    
 
 }
