@@ -72,6 +72,11 @@ public class AsteroidsApplication extends Application{
                 
                 ship.move();
                 asteroid.move();
+                
+                if(ship.collide(asteroid)){
+                    stop();
+                }
+                
             }
         }.start();
     }
