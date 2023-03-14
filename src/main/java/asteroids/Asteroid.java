@@ -11,10 +11,12 @@ import javafx.scene.shape.Polygon;
  *
  * @author Piotr
  */
-public class Ship extends Character{
-    
-    public Ship(int x, int y){
-        super(new Polygon(-5,-5,10,0,-5,5),x,y);
+public class Asteroid extends Character{
+
+    public Asteroid(int x, int y) {
+        super(new Polygon(20, -20, 20, 20, -20, 20, -20, -20), x, y);
     }
+    
+    
     
 }

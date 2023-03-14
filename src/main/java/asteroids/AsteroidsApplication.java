@@ -29,9 +29,16 @@ public class AsteroidsApplication extends Application{
         pane.setPrefSize(600, 400);
         
         Ship ship = new Ship(150,100);
+        Asteroid asteroid = new Asteroid(50,50);
+        
+        pane.getChildren().add(ship.getCharacter());
+        pane.getChildren().add(asteroid.getCharacter());
         
         
-        pane.getChildren().add(ship.getShip());
+        asteroid.turnRight();
+        asteroid.turnRight();
+        asteroid.accelerate();
+        asteroid.accelerate();
         
         Scene scene = new Scene(pane);
         
@@ -54,16 +61,17 @@ public class AsteroidsApplication extends Application{
             @Override
             public void handle(long now){
                 if(pressedKeys.getOrDefault(KeyCode.LEFT, false)){
-                    ship.trunLeft();
+                    ship.turnLeft();
                 }
                 if(pressedKeys.getOrDefault(KeyCode.RIGHT, false)){
-                    ship.trunRight();
+                    ship.turnRight();
                 }
                 if(pressedKeys.getOrDefault(KeyCode.UP, false)){
                     ship.accelerate();
                 }
                 
                 ship.move();
+                asteroid.move();
             }
         }.start();
     }
