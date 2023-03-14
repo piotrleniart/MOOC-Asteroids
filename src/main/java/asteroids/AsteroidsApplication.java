@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -14,6 +15,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class AsteroidsApplication extends Application{
@@ -33,8 +35,15 @@ public class AsteroidsApplication extends Application{
 
     @Override
     public void start(Stage win) throws Exception {
+        
+        
         Pane pane = new Pane();
         pane.setPrefSize(WIDTH, HEIGHT);
+        
+        Text text = new Text(10, 20, "Points: 0");
+        pane.getChildren().add(text);
+        
+        AtomicInteger points = new AtomicInteger();
         
         Ship ship = new Ship(WIDTH/2,HEIGHT/2);
         List<Character> projectiles = new ArrayList<>();
@@ -103,6 +112,9 @@ public class AsteroidsApplication extends Application{
                             asteroid.setAlive(false);
                         }
                     });
+                    if(!projectile.isAlive()){
+                        text.setText("Points: " + points.addAndGet(1000));
+                    }
                 });
                 projectiles.removeAll(removeDead(projectiles, pane));
                 asteroids.removeAll(removeDead(asteroids, pane));
